@@ -28,15 +28,32 @@ Output:
 
 #include<bits/stdc++.h>
 using namespace std;
+//using a simple for loop
 
-int find_sum(int a, int b, vector<int>&arr){
-    int sum = 0;
-    for(int i = a; i<=b; i++)
+// int find_sum(int a, int b, vector<int>&arr){
+//     int sum = 0;
+//     for(int i = a; i<=b; i++)
+//     {
+//         sum += arr[i];
+//     }
+//     return sum;
+// }
+
+//using a prefixSum
+// 5 4 3 6 2 1   a=1 b=3
+// 5 9 12 18 20 21 
+int find_sum(int a, int b, vector<int> &arr)
+{
+    int n = arr.size();
+    vector<int> prefixSum(n, 0);
+    for (int i = 0; i < n; i++)
     {
-        sum += arr[i];
+        prefixSum[i] = prefixSum[i - 1] + arr[i];
     }
-    return sum;
+
+    return (prefixSum[b] - prefixSum[a - 1]);
 }
+
 int main(){
     int n;
     cin>>n;
